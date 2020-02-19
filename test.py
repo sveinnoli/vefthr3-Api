@@ -13,7 +13,7 @@ with urllib.request.urlopen("http://apis.is/petrol") as url:
 #print(key_list)
 
 #val_list = list(data.values())
-#print(val_list)
+#print(val_list)o
 
 #for key, value in data.items():
     #print("Key: %s\n" "value: %d\n", key, value)
@@ -22,19 +22,8 @@ with urllib.request.urlopen("http://apis.is/petrol") as url:
 
 #print(len(data["results"])) 
 
-fyrirtaeki = ["Orkan"]
-for item in range(len(data["results"])):
     #print("item number:", item, "\n", data["results"][item], "\n") # Iterates through dict -> list
     #verd = data["results"][item].get("bensin95") #Gets price from results
-    company = data["results"][item].get("company")
-    if company in fyrirtaeki:
-        print("Item already in DB:", item)
-    else:
-        fyrirtaeki.append(company)
-        print("appended: ", company,)
-print(fyrirtaeki)
-
-
 
 
 
