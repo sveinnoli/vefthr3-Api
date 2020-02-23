@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{%block content%}
+<h1 class="heading-title">Staðir</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Fyrirtæki</th>
+            <th>Staður</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td data-label="Company"><a href="{{insert_key}}" target="_blank">{{instert_company}}</a></td>
+            <td data-label="Game">{{instert_location}}</td>
+        </tr>
+        <tr>
+            <td data-label="Company"><a href="{{insert_key}}" target="_blank">{{instert_company}}</a></td>
+            <td data-label="Game">{{insert_location}}</td>
+        </tr>
+
+    </tbody>
+</table>
+{%endblock%}

@@ -1,0 +1,13 @@
+{% extends "base.html"%}
+
+{%block content%}
+<div class="grid-wrapper">
+{% for key, value in company.items()%}   
+    <div class="company">
+        <a href="/company/{{key}}">
+            <img src="{{value}}" title="{{key}}">
+        </a>
+    </div>
+{%endfor%}
+</div>
+{% endblock%}
