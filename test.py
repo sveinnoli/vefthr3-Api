@@ -6,47 +6,55 @@ with urllib.request.urlopen("http://apis.is/petrol") as url:
 #-------------------------
 # Data dict/list testing
 #--------------------------
-
-#print(type(data))
-
-#key_list = list(data.keys())
-#print(key_list)
-
-#val_list = list(data.values())
-#print(val_list)o
-
-#for key, value in data.items():
-    #print("Key: %s\n" "value: %d\n", key, value)
-
-#print(data["results"][0])
-
-#print(len(data["results"])) 
-
-    #print("item number:", item, "\n", data["results"][item], "\n") # Iterates through dict -> list
-    #verd = data["results"][item].get("bensin95") #Gets price from results
+#data_list = data["results"]
+#for item in data_list:
+#    for key, value in item.items():
+#        if value == "Orkan":
+#            print(item.get("company"))
+#            print(item.get("name"))
+#        else:
+#            pass
 
 
-#print([data["results"][1].keys()])
 
 
-#---------------------------
-# Dictionary Testing
-#---------------------------
-#thisdict =	{
-#  "brand": "Ford",
-#  "model": "Mustang",
-#  "year": 1964
-#}
-#
-#for key, value in thisdict.items():
-#	print(key, value)
+name = {"results":[{"bensin95":235.9,"bensin95_discount":230.9,"company":"Atlantsolía","diesel":227.2,"diesel_discount":222.2,"geo":{"lat":65.69913,"lon":-18.135231},"key":"ao_000","name":"Baldursnes Akureyri"}]}
 
-image_list = ["/static/images/Atlantsolía.png", "/static/images/Costco Iceland.png", "/static/images/Dælan.png", "/static/images/N1.png", "/static/images/ÓB.png", "/static/images/Olís.png", "/static/images/Orkan.png"]
+myDict = {"items":[{"gas":"expensive", "bones":"cool"}, {"gas":"cheap", "bones":"hot"}]}
 
-image_dict = {"Atlantsolía":"/static/images/Atlantsolía.png", "Costco Iceland": "/static/images/Costco Iceland.png", "Dælan":"/static/images/Dælan.png", "N1":"/static/images/N1.png", "Olís":"/static/images/Olís.png","Orkan":"/static/images/Orkan.png" }
+#for key,value in myDict["items"][0].items():
+    #print(key, value)
 
-company_images={"Atlantsolía":"lol", "Olís":"195"}
-for key,value in image_dict.items():
-    print(key)
+newDict = {"companyData":[{}]}
+newDict["companyData"][0]["hi"] = "ok"
+newDict["companyData"][0]["er"] = "no"
 
-company_images.update(Atlantsolía = "image")
+def companyInfo(company):
+    #company_info ={"myData":[{}]}
+    company_info = [{}]
+    itemCounter = 0
+    data_list = data["results"]
+    for dict_item in data_list:
+        for key, value in dict_item.items():
+            if value == "Orkan":
+                company_info[itemCounter]["company"] = dict_item.get("company")
+                company_info[itemCounter]["name"] = dict_item.get("name")
+            else:
+                pass
+    return company_info
+
+print(companyInfo("Orkan"))
+
+level1 = {'value1':0, 'value2':0, 'value3':0}
+level2 = {'value1':0, 'value2':0, 'value3':0}
+level3 = {'value1':0, 'value2':0, 'value3':0}
+level3 = {'value1':0, 'value2':0, 'value3':0}
+
+dic={}
+for x in range (1,6):
+    level = 'ok%d' % x 
+    dic[level] = {}
+    for iteration in range(1, 4): 
+        value = 'value%d' % iteration
+        dic[level][value] = 0 
+print (dic)

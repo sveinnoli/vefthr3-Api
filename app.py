@@ -24,7 +24,6 @@ def CompanyExists(company, company_image):
     for x in range(len(company)):
         for key, value in company_image.items():
             if key == company[x]:
-                print("Not in list:",company[x],key)
                 image_list[company[x]] = value
             else:
                 pass
@@ -36,6 +35,20 @@ data_keys = list(data["results"][0].keys())
 company = list_results(data_keys[2], True) 
 company_image = {"Atlantsolía":"/static/images/Atlantsolía.png", "Costco Iceland": "/static/images/Costco Iceland.png", "Dælan":"/static/images/Dælan.png", "N1":"/static/images/N1.png", "ÓB": "/static/images/ÓB.png","Olís":"/static/images/Olís.png","Orkan":"/static/images/Orkan.png" }
 
+#Code for company location
+def companyInfo(company):
+    item_dict = {}
+    data_list = data["results"]
+    for item in data_list:
+        for key, value in item.items():
+            if value == "Orkan":
+                print(item.get("company"))
+                print(item.get("name"))
+                item_dict["company"] = item.get("company")
+                item_dict["name"] = item.get("name")
+            else:
+                pass
+    return item_dict
 
 @app.route('/')
 def index():
