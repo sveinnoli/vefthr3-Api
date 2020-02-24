@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-import urllib.request, json, time #Gets json objects
+import urllib.request, json #Gets json objects
 app = Flask(__name__)
 with urllib.request.urlopen("http://apis.is/petrol") as url:
     data = json.loads(url.read().decode())
@@ -37,8 +37,7 @@ data_keys = list(data["results"][0].keys())
 company = list_results(data_keys[2], True) 
 company_image = {"Atlantsolía":"/static/images/Atlantsolía.png", "Costco Iceland": "/static/images/Costco Iceland.png", "Dælan":"/static/images/Dælan.png", "N1":"/static/images/N1.png", "ÓB": "/static/images/ÓB.png","Olís":"/static/images/Olís.png","Orkan":"/static/images/Orkan.png" }
 dataDict = data["results"]
-lastPrice = data["timestampPriceChanges"]
-readable = time.ctime(lastPrice)
+
 @app.route('/')
 def index():
 	return render_template("gasvakt.html", company=CompanyExists(company,company_image), bensinVerd = find_min_verd(dataDict, "bensin95"), dieselVerd = find_min_verd(dataDict, "diesel"), data=data)
