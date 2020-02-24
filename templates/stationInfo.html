@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{%block title%}
+<title>{{gasCompany}}</title>
+{%endblock%}
+{%block content%}
+{% for company in dataDict%}
+    {% for key, value in company.items() %} 
+        {% if key == "key" and value == id %}
+            <div class="information-container">
+                <h1>Nánari upplýsingar</h1>
+                <ul class="info">
+                    <li>Söluaðili: {{company["company"]}}</li>
+                    <li>Staður: {{company["name"]}}</li>
+                    <li>Verð á 1. lítra af Bensíni, 95 oktan: {{company["bensin95"]}}</li>
+                    <li>Verð á 1. lítra af Dísel olíu: {{company["diesel"]}}</li>
+                </ul>
+            </div>
+            <div class="info-container">
+                <h4></h4>
+                <ul>
+                    <li>Breiddargráða: {{company["geo"]["lat"]}}</li>
+                    <li>Lengdargráða: {{company["geo"]["lon"]}}</li>
+                    <li><a href="https://www.google.com/maps/@{{company['geo']['lat']}},{{company['geo']['lon']}},18z/">Staðsetning á Google korti</a></li>
+                </ul>
+            </div>
+        {% endif %}
+    {% endfor%}
+{% endfor %}
+{%endblock%}

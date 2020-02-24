@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-import urllib.request, json #Gets json objects
+import urllib.request, json, time #Gets json objects
 app = Flask(__name__)
 with urllib.request.urlopen("http://apis.is/petrol") as url:
     data = json.loads(url.read().decode())
@@ -29,34 +29,27 @@ def CompanyExists(company, company_image):
                 pass
     return image_list
 
+def find_min_verd(dict_list, bensin):
+    return {"bensin":min(dict_list, key=lambda d: d.get(bensin, float('inf')))[bensin], "company":min(dict_list, key=lambda d: d.get(bensin, float('inf')))["company"], "name":min(dict_list, key=lambda d: d.get(bensin, float('inf')))["name"]}
 
 # 0=price, 1=price_discount, 2=company, 3=diesel, 4=diesel_discount, 5=geo, 6=key, 7=name:
 data_keys = list(data["results"][0].keys()) 
 company = list_results(data_keys[2], True) 
 company_image = {"Atlantsolía":"/static/images/Atlantsolía.png", "Costco Iceland": "/static/images/Costco Iceland.png", "Dælan":"/static/images/Dælan.png", "N1":"/static/images/N1.png", "ÓB": "/static/images/ÓB.png","Olís":"/static/images/Olís.png","Orkan":"/static/images/Orkan.png" }
-
-#Code for company location
-def companyInfo(company):
-    item_dict = {}
-    data_list = data["results"]
-    for item in data_list:
-        for key, value in item.items():
-            if value == "Orkan":
-                print(item.get("company"))
-                print(item.get("name"))
-                item_dict["company"] = item.get("company")
-                item_dict["name"] = item.get("name")
-            else:
-                pass
-    return item_dict
-
+dataDict = data["results"]
+lastPrice = data["timestampPriceChanges"]
+readable = time.ctime(lastPrice)
 @app.route('/')
 def index():
-	return render_template("gasvakt.html", company=CompanyExists(company,company_image))
+	return render_template("gasvakt.html", company=CompanyExists(company,company_image), bensinVerd = find_min_verd(dataDict, "bensin95"), dieselVerd = find_min_verd(dataDict, "diesel"), data=data)
 
 @app.route('/company/<gasCompany>')
 def station(gasCompany):
-    return render_template("station.html",gasCompany=gasCompany)
+    return render_template("station.html", gasCompany=gasCompany, dataDict=dataDict)
+
+@app.route('/company/<gasCompany>/<id>')
+def stationInfo(gasCompany, id):
+    return render_template("stationInfo.html", gasCompany=gasCompany, dataDict=dataDict, id=id)
 
 @app.errorhandler(404)
 def page_not_found(e):

@@ -1,5 +1,8 @@
-{% extends "base.html"%}
 
+{% extends "base.html"%}
+{%block title%}
+<title>Gasvaktin</title>
+{%endblock%}
 {%block content%}
 <div class="grid-wrapper">
 {% for key, value in company.items()%}   
@@ -9,5 +12,11 @@
         </a>
     </div>
 {%endfor%}
+</div>
+<div class="info-container">
+    
+    <h4>Ódýrasta bensínið: {{bensinVerd["bensin"]}}. er hjá {{bensinVerd["company"]}}, {{bensinVerd["name"]}}</h4>
+    <h4>Ódýrasta Díesel bensín: {{dieselVerd["bensin"]}}. er hjá {{dieselVerd["company"]}}, {{dieselVerd["name"]}}</h4>
+    <p>Síðast uppfært: {{data["timestampPriceChanges"]}}</p>
 </div>
 {% endblock%}

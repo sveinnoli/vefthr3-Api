@@ -1,5 +1,7 @@
 {% extends "base.html" %}
-
+{%block title%}
+<title>Fyrirtæki</title>
+{%endblock%}
 {%block content%}
 <h1 class="heading-title">Staðir</h1>
 <table>
@@ -10,15 +12,16 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td data-label="Company"><a href="{{insert_key}}" target="_blank">{{instert_company}}</a></td>
-            <td data-label="Game">{{instert_location}}</td>
-        </tr>
-        <tr>
-            <td data-label="Company"><a href="{{insert_key}}" target="_blank">{{instert_company}}</a></td>
-            <td data-label="Game">{{insert_location}}</td>
-        </tr>
-
+        {% for company in dataDict%}
+            {% for key, value in company.items() %} 
+                {% if key == "company" and value == gasCompany %}
+                    <tr>
+                        <td data-label="Fyrirtæki"><a href="{{gasCompany}}/{{company['key']}}" target="_blank">{{gasCompany}}</a></td>
+                        <td data-label="Staður">{{company["name"]}}</td>
+                    </tr>
+                {% endif %}
+            {% endfor%}
+        {% endfor %}
     </tbody>
 </table>
 {%endblock%}

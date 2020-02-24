@@ -38,6 +38,12 @@ img {
     height: auto;
 }
 
+ul li{
+    list-style:none;
+}
+li {
+    list-style:none;
+}
 #headwrapper {
     background-color:black;
 }
@@ -46,6 +52,15 @@ img {
     width: 70em;
     margin: 4.2em auto 0 auto;
     flex: 1 0 auto;
+}
+
+.info-container {
+    align-items: center;
+    border: 1.25px solid black;
+    padding: 0.25em;
+    max-width: 30em;
+    margin: 0 auto;
+    background:lightskyblue;
 }
 
 @media screen and (max-width:70em) {
